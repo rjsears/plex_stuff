@@ -1,5 +1,5 @@
 #!/usr/bin/python
-""" This script check my external IP and makes system changes"""
+""" This script checks my external IP and notifies me of changes"""
 
 from __future__ import print_function
 
