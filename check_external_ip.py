@@ -5,8 +5,8 @@ from __future__ import print_function
 
 # check_external_ip.py
 # script to automate checking external ip address on my network
-# and alert me via Pushbullet if it changes. Eventually it will link
-# to external services on my other systems to automatically update.
+# and alert me via Pushbullet & email if it changes. Eventually it will link
+# to external services on my other systems to automatically update things.
 __author__ = 'Richard J. Sears'
 VERSION = "0.1 (2017-09-23)"
 # richard@sears.net
