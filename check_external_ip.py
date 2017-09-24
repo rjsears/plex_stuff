@@ -8,7 +8,7 @@ from __future__ import print_function
 # and alert me via Pushbullet if it changes. Eventually it will link
 # to external services on my other systems to automatically update.
 __author__ = 'Richard J. Sears'
-VERSION = "0.1 (2017-04-05)"
+VERSION = "0.1 (2017-09-23)"
 # richard@sears.net
 
 # Are we running in debug mode?
