@@ -68,6 +68,10 @@ def send_ip_warning():
 def main():
     if DEBUG:
         print("Starting check_external_ip.py")
+    # Don't bother to check anything if an alert has already been sent
+    # and we have not updated this script. After updating, remove the
+    # file /root/check_external_ip/ip_alert_sent and the script will
+    # start to run again.
     if os.path.isfile('/root/check_external_ip/ip_alert_sent'):
         if DEBUG:
             print("Bypassing, Alert Already Sent")
