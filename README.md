@@ -13,4 +13,5 @@ Simple script to call to send pushbullet notifications.
 # check_external_ip.py
 Python script that I run every few minutes to alert me if my external IP address has changed. Good for tracking firewall rules,
 and other things that may rely on a specific known external ip address. It will then notify me via pushbullet (free) and email
-of the new IP address.
+of the new IP address. First checks to see if there is internet access, if not it quits and will run again in another few 
+minutes.
