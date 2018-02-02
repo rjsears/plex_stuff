@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Specify your email address here:
-email="richard@sears.net"
+email="your_email@here.com"
 logfile="/tmp/hd_temp_report.tmp"
 smartctl=/usr/local/sbin/smartctl
 critTemp=30
-subject="CRITIAL HD TEMP - PHOENIX NAS"
+subject="CRITIAL HD TEMP - SERVER NAS"
 
 
 
 send_pb_alert()
 {
-    /root/scripts/push.sh "Phoenix HD TEMP ALERT" "Your Phoenix Hard Drives are HOT!"
+    /root/scripts/push.sh "HD TEMP ALERT" "Your Server Hard Drives are HOT!"
     touch /root/scripts/hd_temp_alert_sent
 }
 
@@ -30,7 +30,7 @@ send_email_alert()
     ### Set email body ###
     echo "<pre style=\"font-size:14px\">" >> ${logfile}
     (
-     echo "There is a problem with the temperature on one or more hard drives on your Phoenix FreeNAS Server."
+     echo "There is a problem with the temperature on one or more hard drives on your FreeNAS Server."
      echo ""
      echo "It is HIGHLY advisable that you relocate the servers to a cooler location before "
      echo "any of your hard drives are damaged!"
@@ -40,7 +40,7 @@ send_email_alert()
      echo ""
      echo ""
      echo ""
-     echo "You will only receive this email once per day. To immediately re-enable this alert, please ssh into your Phoenix FreeNAS "
+     echo "You will only receive this email once per day. To immediately re-enable this alert, please ssh into your FreeNAS "
      echo "server and remove this file:  "
      echo ""
      echo ""
