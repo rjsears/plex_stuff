@@ -9,3 +9,6 @@ rsync backup script to keep two FreeNAS servers in sync. I choose rsync as oppos
 
 # push.sh
 Simple script to call to send pushbullet notifications.
+
+# drive_temp.sh
+Monitors drive temps via smartctl and send both and email and pushbullet alert when drives exceed a setc temp. I run this in a cron every 10 minutes and once per night I remove the touchfile (/root/scripts/hd_temp_alert_sent) so that I will get an alert at least once per day if the drives are overtemp. Make necessary changes to your email address, etc. Assumes that your server has sendmail and it is configured to send outbound email. Also assume you have smartctl and curl installed and configured.
