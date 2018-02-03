@@ -4,7 +4,7 @@
 email="your_email@here.com"
 logfile="/tmp/hd_temp_report.tmp"
 smartctl=/usr/local/sbin/smartctl
-critTemp=30
+critTemp=45
 subject="CRITIAL HD TEMP - SERVER NAS"
 
 
