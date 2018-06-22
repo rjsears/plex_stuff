@@ -1,5 +1,9 @@
 #!/bin/bash
-# Quick script to run via cron to run system scrubs on ZFS filesystems.
+# Quick script to run via cron to launch system scrubs on ZFS filesystems.
+# Once started they will run in the background until completed.
+
+# I use the "proxmox_zfs_smart_report.sh" script in conjunction with this script setting
+# it to run the day after my scrubs.
 
 # Script expects to be able to record its progress in a /root/logs directory.
 
