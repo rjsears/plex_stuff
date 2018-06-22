@@ -192,7 +192,7 @@ for pool in $pools; do
     elif [ "$(echo "$statusOutput" | grep "scan:" | awk '{print $2}')" = "resilvered" ]; then
             resilver="<BR>Resilvered"
             scrubRepBytes="$(echo "$statusOutput" | grep "scan:" | awk '{print $3}')"
-            scrubErrors="$(echo "$statusOutput" | grep "scan:" | awk '{print $9}')"
+            scrubErrors="$(echo "$statusOutput" | grep "scan:" | awk '{print $7}')"
             # Convert time/datestamp format presented by zpool status, compare to current date, calculate scrub age
             #scrubDate="$(echo "$statusOutput" | grep "scan:" | awk '{print $16"-"$13"-"$14"_"$15}')"
             scrubDate="$(zpool status "$pool" | grep "scan" | awk '{print $11" "$12" " $13" " $14" "$15}')"
