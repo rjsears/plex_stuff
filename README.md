@@ -12,3 +12,6 @@ Monitors drive temps via smartctl and send both and email and pushbullet alert w
 
 # proxmox_zfs_smart_report.sh
 Script used on my FreeNAS servers to monitor ZFS and SMART information. I modified it for us on Linux systems, mostly my Proxmox servers running on top of ZFS. Original script can be found at forums.freenas.org.
+
+# drive_temp_proxmox.sh
+Drive temp script to report excessive drive temps on Proxmox servers. Drives to monitor are set manually in the script and should be SATA only. SSD and SAS do not report drive temps correctly for this script.
