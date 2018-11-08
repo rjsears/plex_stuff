@@ -15,3 +15,14 @@ Script used on my FreeNAS servers to monitor ZFS and SMART information. I modifi
 
 # drive_temp_proxmox.sh
 Drive temp script to report excessive drive temps on Proxmox servers. Drives to monitor are set manually in the script and should be SATA only. SSD and SAS do not report drive temps correctly for this script.
+
+# check_firewall_status
+Super simple script to check the output of iptables -L, search for a specific string (like a server name or ip),
+count the occurances of that string and send a warning via pushbullet (free) if it is not found which (in my case)
+means something happened to the firewall. Will only alert ONCE so you don't get spammed everytime you run the script. 
+I run it every 5 minutes from cron:
+
+*/5 * * * * /root/check_firewall_status >/dev/null 2>&1
+
+ Reloads a saved rules file from the /etc/iptables/emer directory,
+ this can be changed to suite your needs. Enjoy
