@@ -1,0 +1,51 @@
+#!/bin/bash
+
+#####################################################################
+# Super simple script to check the output of iptables -L, 
+# search for a specific string (like a server name or ip),
+# count the occurances of that string and send a warning
+# via pushbullet (free) if it is not found which (in my case)
+# means something happened to the firewall. Will only alert
+# ONCE so you don't get spammed everytime you run the script. 
+# I run it every 5 minutes from cron:
+#
+#  */5 * * * * /root/check_firewall_status >/dev/null 2>&1
+#
+# Reloads a saved rules file from the /etc/iptables/emer directory,
+# this can be changed to suite your needs. Enjoy
+#
+# 11/8/2018 - Richard J. Sears (richard@sears.net)
+#####################################################################
+
+
+FAILTITLE="SERVER FIREWALL FAILURE"
+FAILMESSAGE="The Firewall on SERVER has failed!"
+OKTITLE="SERVER FIREWALL OK"
+OKMESSAGE="The Firewall on SERVER has been restarted!"
+ACCESSTOKEN=o.hyn765djnmnskisy6523jsusnekk
+SEARCH_STRING="enter_search_string_here"
+
+FWSTATUS=`/sbin/iptables -L | grep $SEARCH_STRING | wc -l`
+EXPECTED_STATUS=2
+
+    if [ "$FWSTATUS" = "$EXPECTED_STATUS" ]; then
+         echo "Firewall Normal"
+         if [ -e /root/firewall_alert_sent ]; then
+            /usr/local/bin/curl --header "Access-Token: ${ACCESSTOKEN}" --header 'Content-Type: application/json' --data-binary "{\"body\":\"${OKMESSAGE}\",\"title\":\"${OKTITLE}\",\"type\":\"note\"}" --request POST https://api.pushbullet.com/v2/pushes >> /dev/null
+            rm /root/firewall_alert_sent
+            exit
+         else
+           exit
+         fi
+    else
+         echo "Houston, we have a problem"
+         if [ -e /root/firewall_alert_sent ]; then
+            exit
+         else
+           /usr/local/bin/curl --header "Access-Token: ${ACCESSTOKEN}" --header 'Content-Type: application/json' --data-binary "{\"body\":\"${FAILMESSAGE}\",\"title\":\"${FAILTITLE}\",\"type\":\"note\"}" --request POST https://api.pushbullet.com/v2/pushes >> /dev/null
+           touch /root/firewall_alert_sent
+           /sbin/iptables-restore < /etc/iptables/emer/rules.v4
+           echo "Firewall Restore Complete - Please check!"
+           exit
+         fi
+    fi
